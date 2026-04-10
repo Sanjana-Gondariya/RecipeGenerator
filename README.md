@@ -230,6 +230,5 @@ Installs dependencies in all project folders.
 ## Team
 
 - Riddhi Patel
-- Armina Rahman
 - Sanjana Gondariya
-- Elizabeth Perry
+
