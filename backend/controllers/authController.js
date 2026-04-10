@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import excelStorage from '../models/excelStorage.js';
+import { getJwtSecret } from '../config/authConfig.js';
 
 class AuthController {
   async signup(req, res) {
@@ -45,13 +46,9 @@ class AuthController {
       };
 
       // Generate JWT token
-      if (!process.env.JWT_SECRET) {
-        return res.status(500).json({ error: 'Server configuration error' });
-      }
-      
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        process.env.JWT_SECRET,
+        getJwtSecret(),
         { expiresIn: '7d' }
       );
 
@@ -94,13 +91,9 @@ class AuthController {
       }
 
       // Generate JWT token
-      if (!process.env.JWT_SECRET) {
-        return res.status(500).json({ error: 'Server configuration error' });
-      }
-      
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        process.env.JWT_SECRET,
+        getJwtSecret(),
         { expiresIn: '7d' }
       );
 
@@ -162,4 +155,3 @@ class AuthController {
 }
 
 export default new AuthController();
-
